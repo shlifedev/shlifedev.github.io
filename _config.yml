@@ -1,4 +1,4 @@
-# Welcome to Jekyll!
+﻿# Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your entire site, values
 # which you are expected to set up once and rarely need to edit after that.
@@ -107,9 +107,9 @@ analytics:
 # Site Author
 author:
   name             : "CheeseAllergyHamster"
-  avatar           : # path of avatar image, e.g. "/assets/images/profile_photo.jpg"
+  avatar           : "/assets/images/profile_photo.png"
 #  avatar           : "https://i.imgur.com/3FpLzFF.jpg";
-  bio              : "���ߺ��α�"
+  bio              : "=ㅅ="
   location         : "Hamster Town"
   email            :
   links:

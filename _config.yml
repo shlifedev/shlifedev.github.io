@@ -107,8 +107,8 @@ analytics:
 # Site Author
 author:
   name             : "CheeseAllergyHamster"
- # avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  avatar           : "https://i.imgur.com/3FpLzFF.jpg";
+  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+#  avatar           : "https://i.imgur.com/3FpLzFF.jpg";
   bio              : "개발블로그"
   location         : "Hamster Town"
   email            :

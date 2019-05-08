@@ -142,8 +142,8 @@ footer:
       icon: "fab fa-fw fa-facebook-square"
       # url:
     - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-       url: "http://github.com/shlifedev"
+      icon: "fab fa-fw fa-github" 
+      # URL:
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:

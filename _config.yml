@@ -71,7 +71,7 @@ algolia:
   application_id         : # YOUR_APPLICATION_ID
   index_name             : # YOUR_INDEX_NAME
   search_only_api_key    : # YOUR_SEARCH_ONLY_API_KEY
-  powered_by             : false
+  powered_by             :  # true, false (default)
 google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
@@ -107,7 +107,7 @@ analytics:
 # Site Author
 author:
   name             : "CheeseAllergyHamster"
-  avatar           : # path of avatar image, e.g. "/assets/images/profile_photo.png"
+  avatar           : # path of avatar image, e.g. "/assets/images/profile_photo.jpg"
 #  avatar           : "https://i.imgur.com/3FpLzFF.jpg";
   bio              : "개발블로그"
   location         : "Hamster Town"

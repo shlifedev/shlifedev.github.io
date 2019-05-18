@@ -1,2 +1,4 @@
-타워 디펜스 프로젝트 위키 개발로그를 작성했지만 관리의 불편함이 너무 많아..
-md에 맡게 레이아웃을 구상한 후 곧 github.io로 이동시킬 예정입니다.
+## :) Start 05 08.
+https://shlifedev.github.io/
+
+ddMarkdown Shortcuts

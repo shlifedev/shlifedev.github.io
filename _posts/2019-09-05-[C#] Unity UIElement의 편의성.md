@@ -168,8 +168,139 @@ public class ElementTest : EditorWindow
 ## Uxml, Uss를 이용해서 똑같이 작성하기
 
  기존 C# 코드를 보면 너무 지저분하다. 물론 내가 정리를 안하고 막코딩 한것도 있지만.. 저렇게 하면 결국 IMGUI 스타일이다. 나는 Uxml,Uss를 이용해서 작성해보려고한다. 
+ 
+### Uxml의 작성
+아래 코드를 복사해서 Assets/Editor/ElementTest.uxml 경로로 저장.
+
+```xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+
+    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+    xsi:schemaLocation="
+                        UnityEngine.UIElements ../../UIElementsSchema/UnityEngine.UIElements.xsd
+                        UnityEditor.UIElements ../../UIElementsSchema/UnityEditor.UIElements.xsd
+                        UnityEditor.PackageManager.UI ../../UIElementsSchema/UnityEditor.PackageManager.UI.xsd
+"
+>
+  <engine:VisualElement class ="Title">
+    <!-- VisualEmenet Title의 태그 안에 있으므로 자식 오브젝트가 된다.--> 
+    <engine:Label text ="Uss VisualElement Test">
+    </engine:Label>
+  </engine:VisualElement>
+
+  <engine:VisualElement class ="BodyElement">
+    <engine:Button class ="ButtonOK" text="OK"/>
+    <engine:Button class ="ButtonCancel" text="Cancel"/>
+  </engine:VisualElement>
+
+</engine:UXML>
+
+``` 
+
+아래 코드를 복사해서 Assets/Editor/ElementTest.uss 경로로 저장.
+``` css
+.Title{
+	background-color : #0000ff; 
+	height : 20;
+} 
+
+
+/*  .Title 클래스 안에 있는 Label에 적용 */
+.Title > Label{
+	-unity-text-align: middle-center;
+	color : #ffffff;
+}
+
+
+
+.BodyElement{
+	background-color : #121212;
+	width : auto;
+	height : 90;
+	justify-content : center;
+	align-items : center;
+	flex-direction : row;
+} 
+.BodyElement > .ButtonOK {
+	-unity-background-image-tint-color: #0000ff;
+	width : 50;
+	height : 25;
+	color : #ffffff; 
+}
+ 
+.BodyElement > .ButtonCancel {
+	-unity-background-image-tint-color: #ff0000;
+	width : 50;
+	height : 25;
+	color : #ffffff; 
+}
+```
+
+ 아래 코드를 복사해서 Assets/Editor/ElementTest.cs 로 저장 
+```cs
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEditor.UIElements;
+
+
+public class ElementTest : EditorWindow
+{
+    static ElementTest wnd;
+    [MenuItem("Window/UIElements/ElementTest")]
+    public static void ShowExample()
+    {
+        wnd = GetWindow<ElementTest>();
+        wnd.titleContent = new GUIContent("ElementTest");
+        wnd.maxSize = new Vector2(300, 100);
+        wnd.minSize = new Vector2(300, 100);
+    }
+
+    /// <summary>
+    /// uxml을 불러와서 Root에 넣어주는 함수. 
+    /// </summary>
+    /// <param name="path"></param>
+    public VisualElement LoadUxmlToRoot(string path, string styleSheetPath = null)
+    {
+        //루트 트리를 가져온다.
+        VisualElement root = this.rootVisualElement; 
+        var uxml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(path);  
+        var loadedVisualElement = uxml.CloneTree(); 
+        root.Add(loadedVisualElement);  
+        if(styleSheetPath != null)
+        { 
+            LoadUss(styleSheetPath, loadedVisualElement);
+        }
+        return loadedVisualElement;
+    } 
+
+    /// <summary>
+    /// 불러온다음 target 엘리먼트에 스타일시트 적용 
+    /// </summary> 
+    public void LoadUss(string path, VisualElement target)
+    { 
+        var uss = AssetDatabase.LoadAssetAtPath<StyleSheet>(path); 
+        Debug.Log(uss); 
+        target.styleSheets.Add(uss);   
+    }
+
+    public void OnEnable()
+    {
+        VisualElement root = this.rootVisualElement;
+        var titleBody = LoadUxmlToRoot("Assets/Editor/ElementTest.uxml", "Assets/Editor/ElementTest.uss");  
+    }
+}
+```
+
+훨씬 더 깔끔하다. UI 레이아웃 변경이 필요한경우 언제든지 uss에서 수정하면 되고 새로운 UI의 추가가 필요한경우 단순히 uxml에서 수정만 하면 된다. 코드를 건들 필요가 없다.
+
+
 
 
 
  ![UI_Element](https://raw.githubusercontent.com/shlifedev/shlifedev.github.io/master/assets/images/changeUSS.gif)
- 

@@ -7,9 +7,12 @@
    UIElement를 처음 접했을때 HTML과 CSS의 느낌을 강하게 받았다. 
    확실히 HTML이나 CSS처럼 GUI가 관리 될 수 있다면 이건 개발자, 디자이너 서로에게 엄청난 생산성 증가를 가져온다. 프로그래머는 확장에 대한 걱정을 할 필요가 없다. 
 
-   UIElement는 uxml, uss 라는 확장자로 나뉘어 관리된다. uxml은 버튼,인풋필드,레이아웃 등의 형상을 관리하고 uss는 버튼의 색상, 크기, 레이아웃의 사이즈, 정렬기준등을 지정하는 스타일시트 개념이된다. HTML로 따지면 uxml이 HTML이고, uss가 css가된다.
+   그리고 UIElement는 uxml, uss 라는 확장자로 나뉘어 관리된다. uxml은 버튼,인풋필드,레이아웃 등의 형상을 관리하고 uss는 버튼의 색상, 크기, 레이아웃의 사이즈, 정렬기준등을 지정하는 스타일시트 개념이된다. HTML로 따지면 uxml이 HTML이고, uss가 css가된다.
 
-   이 문서에서는 UIElement의 대단함(?), 편리함(?)을 써내려 가볼려고한다. 사실 HTML, CSS의 개념이 잡혀있는 웹을 취미로 해본 분이라면 정말 쉽게 접근할 수 있다.
+
+   uxml, uss로 관리할때의 장점은 컴파일이 필요없고 프로그래머가 렌더링에 대한 최적화를 고민할 필요가 없다는 점이다.
+
+   이 문서에서는 UIElement의 기본적인 사용법을 소개하고자한다. 그리고 이해를 돕고자한다. 사실 HTML, CSS의 개념이 잡혀있는 웹을 취미로 해본 분이라면 정말 쉽게 접근할 수 있다. 아닌 분들은 유감. 그래도 글을 읽어보면 이해가 되지 않을까...?
 
 ## VisualElement란?
 
@@ -20,7 +23,7 @@
  자, 다같이 따라서 아래와 같은 레이아웃을 한번 구현해보자!!
 
  ![UI_Element](https://raw.githubusercontent.com/shlifedev/shlifedev.github.io/master/assets/images/layout_element.PNG)
-
+ 
  우리가 위와같은 레이아웃을 짜는 방법은 두가지가 있다.
 
    1. UIElement를 사용한 C# 스크립팅으로 짜는법 (컴파일 필요)
@@ -93,6 +96,7 @@ public class ElementTest : EditorWindow
 (코드 이해를 돕기 위해 함수처리를 따로 하진 않겠음)
 
 ```csharp
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -101,11 +105,14 @@ using UnityEditor.UIElements;
 
 public class ElementTest : EditorWindow
 {
-    [MenuItem("Window/UIElements/ElementTest")]
+    static ElementTest wnd;
+    [MenuItem("Window/UIElements/ElementTest")] 
     public static void ShowExample()
     {
-        ElementTest wnd = GetWindow<ElementTest>();
+        wnd = GetWindow<ElementTest>();
         wnd.titleContent = new GUIContent("ElementTest");
+        wnd.maxSize = new Vector2(300, 100);
+        wnd.minSize = new Vector2(300, 100);
     }
 
     public void OnEnable()
@@ -113,10 +120,7 @@ public class ElementTest : EditorWindow
         VisualElement root = this.rootVisualElement;
 
         VisualElement TitleElement = new VisualElement();
-        VisualElement BodyElement = new VisualElement();
-        VisualElement FootElement = new VisualElement();
-        VisualElement LogElement = new VisualElement();
-
+        VisualElement BodyElement = new VisualElement(); 
 
         //root에 TitleElement를 자식으로 추가한다.
         root.Add(TitleElement);
@@ -126,22 +130,9 @@ public class ElementTest : EditorWindow
 
         //root에 BodyElement 자식으로 추가한다.
         root.Add(BodyElement);
-        //사이즈 설정 
-        BodyElement.style.height = 150;
-        BodyElement.style.backgroundColor = Color.cyan;
-
-        //root에 FootElement 자식으로 추가한다.
-        root.Add(FootElement);
-        //사이즈 설정 
-        FootElement.style.height = 40;
-        FootElement.style.backgroundColor = Color.green;
-
-        //root에 LogElement 자식으로 추가한다.
-        root.Add(LogElement);
-        //사이즈 설정 
-        LogElement.style.height = 100;
-        LogElement.style.backgroundColor = Color.black;
-
+        //사이즈 설정  
+        BodyElement.style.height = 80;
+        BodyElement.style.backgroundColor = new Color(0.1f,0.1f,0.1f);
         //라벨 생성, 스타일지정, 추가
         Label titleLabel = new Label();
         titleLabel.style.color = Color.white;
@@ -153,45 +144,37 @@ public class ElementTest : EditorWindow
         //추가되는 자식들을 '열' 기준으로 정렬한다. (이 옵션을 주지 않으면 버튼1,2가 Element안에 세로로 나열되어 들어감.)
         //한마디로 이 옵션은 기본 GUI에 BeginHorizontal(); 과 같다.
         BodyElement.style.flexDirection = new StyleEnum<FlexDirection>() { value = FlexDirection.Row };
-        BodyElement.style.alignItems = new StyleEnum<Align>() { value = Align.Center };
+        BodyElement.style.alignItems = new StyleEnum<Align>() { value = Align.Center }; 
+        BodyElement.style.justifyContent = new StyleEnum<Justify>() {value = Justify.Center };
+
+
+        // 버튼 생성, 스타일지정, 추가.
         Button body_btn_1 = new Button();
         body_btn_1.style.width = 70;
-        body_btn_1.style.height = 70;
-        body_btn_1.text = "버튼1";
+        body_btn_1.style.height = 30;
+        body_btn_1.style.unityBackgroundImageTintColor = Color.blue;
+        body_btn_1.style.color = Color.white;
+        body_btn_1.text = "Send";
         BodyElement.Add(body_btn_1);
 
+        
         Button body_btn_2 = new Button();
         body_btn_2.style.width = 70;
-        body_btn_2.style.height = 70;
-        body_btn_2.text = "버튼2";
-        BodyElement.Add(body_btn_2);
-
-
-        //추가되는 자식들을 '열' 기준으로 정렬한다. (이 옵션을 주지 않으면 버튼1,2가 Element안에 세로로 나열되어 들어감.)
-        //한마디로 이 옵션은 기본 GUI에 BeginHorizontal(); 과 같다.
-        FootElement.style.flexDirection = new StyleEnum<FlexDirection>() { value = FlexDirection.Row };
-        FootElement.style.alignItems = new StyleEnum<Align>() { value = Align.Center };
-        Button foot_btn_ok = new Button();
-        foot_btn_ok.style.width = 70;
-        foot_btn_ok.style.height = 32;
-        foot_btn_ok.style.unityBackgroundImageTintColor = Color.black;
-        foot_btn_ok.style.color = Color.white;
-        foot_btn_ok.text = "OK"; 
-        FootElement.Add(foot_btn_ok);
-
-        Button foot_btn_cancel = new Button();
-        foot_btn_cancel.style.width = 70;
-        foot_btn_cancel.style.height = 32;
-        foot_btn_cancel.style.unityBackgroundImageTintColor = Color.red;
-        foot_btn_cancel.style.color = Color.white; 
-        foot_btn_cancel.text = "Cancel";
-        FootElement.Add(foot_btn_cancel);
-
+        body_btn_2.style.height = 30;
+        body_btn_2.style.unityBackgroundImageTintColor = Color.red;
+        body_btn_2.style.color = Color.white;
+        body_btn_2.text = "Error";
+        BodyElement.Add(body_btn_2); 
 
     }
-}
+}    
+
 ```
 
+ **적용된 모습**
+
+ ![UI_Element](https://raw.githubusercontent.com/shlifedev/shlifedev.github.io/master/assets/images/43.PNG)
+ 
 
 
 

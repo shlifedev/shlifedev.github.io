@@ -2,9 +2,12 @@
 ## [C#] UIElement의 사용
    **추신: uxml, uss와 친해지려면 html, css를 잠깐만 접해보는걸 추천합니다.**
 
+추천 유니티 공식문서<br>
+https://github.com/Unity-Technologies/UIElementsExamples - 예제 소스<br>
+https://blogs.unity3d.com/kr/2019/04/23/whats-new-with-uielements-in-2019-1/ - 소개글 
 #### 이 글은 유니티 2019.1.11f1 기준으로 작성되었습니다. 
 
------------
+ 
    나는 아직 IMGUI에 익숙하다. 하지만 IMGUI 코드는 짜다보면 
    정갈하게 코드 정리 하기도 쉽지 않을 뿐더러 한번 디자인을 하고 나면 다른 레이아웃으로 변경하는게 보통일이 아니다. 
 
@@ -459,3 +462,8 @@ public class ElementTest : EditorWindow
  ![UI_Element](https://raw.githubusercontent.com/shlifedev/shlifedev.github.io/master/assets/images/show.PNG)
 
 
+## 마치며 
+
+ 시간 여유가 너무 없어서 추후 차마 다 못쓴 내용들을 보강할 예정. 하지만 저정도의 개념만을 이해했다면 사실 한글화가 잘된 유니티 공식문서만 봐도 더 많은 정보와 팁을 얻을 수 있음. 깃허브에서 예제소스 다운받아 보는게 이 글 보고 따라하는것보다 백배 빠를지도 모르겠다. 이 글을 쓴 이유는 UIElement에 대해서 아직 모르는 사람이 있기에 작성 해 본 글. 
+ 
+  

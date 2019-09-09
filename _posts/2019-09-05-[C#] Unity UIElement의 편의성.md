@@ -27,7 +27,9 @@ https://blogs.unity3d.com/kr/2019/04/23/whats-new-with-uielements-in-2019-1/ - �
 
 ## VisualElement란?
 
-    Scripting API에서는 UIElements의 기본이 되는 클래스로 설명하고있다. VisualElement 자체만으로는 보통 레이아웃을 처리할때 사용되며 버튼이나 인풋필드, 프로퍼티 필드등도 렌더링을 위해 VisualElement에서 파생되는 클래스이다. 즉, 렌더링, 이벤트처리, 레이아웃처리 등을 위해 사용되는 클래스이다.
+-  **Scripting API에서는 UIElements의 기본이 되는 클래스로 설명하고있다. VisualElement 자체만으로는 보통 레이아웃을 처리할때 사용되며 버튼이나 인풋필드, 프로퍼티 필드등도 렌더링을 위해 VisualElement에서 파생되는 클래스이다. 즉, 렌더링, 이벤트처리, 레이아웃처리 등을 위해 사용되는 클래스이다.**
+
+ 
  
  그럼 VisualElement를 이용해서 레이아웃을 먼저 잡아보겠다.
 

@@ -23,7 +23,7 @@ https://blogs.unity3d.com/kr/2019/04/23/whats-new-with-uielements-in-2019-1/ - �
    하지만 레이아웃 설계가 확실해야하는 에디터는 UIElement를 사용해보시길 추천드립니다. 
    ----------- 
 
-## VisualElement란?
+## VisualElement로 레이아웃을 만들기
 
 -  **Scripting API에서는 UIElements의 기본이 되는 클래스로 설명하고 있습니다.
    VisualElement 클래스는 보통 레이아웃을 처리할때 사용됩니다. 
@@ -31,13 +31,13 @@ https://blogs.unity3d.com/kr/2019/04/23/whats-new-with-uielements-in-2019-1/ - �
    UIElement에서 사용하는 모든 렌더링된 객체들은 VisualElement를 상속받는다고 보시면 됩니다.
 
  
- 그럼 VisualElement를 이용해서 레이아웃을 먼저 잡아봅시다.
- ![UI_Element](https://raw.githubusercontent.com/shlifedev/shlifedev.github.io/master/assets/images/layout_element.PNG) 
+ 그럼 VisualElement를 이용해서 레이아웃을 먼저 잡아봅시다. 
+ ![UI_Element](https://raw.githubusercontent.com/shlifedev/shlifedev.github.io/master/assets/images/43.PNG)
+ 우리는 이런 형태의 UI를 만들것이고, 정말 쉽게 가능합니다. 
+ 만드는 방법은 아래와 같습니다.
 
- 정말 간단한 레이아웃입니다. 구현 방법은 두가지입니다.
-
-   1. UIElement C# API 스크립팅으로만 짜는법 (컴파일 필요)
-   2. Uxml, Uss를 작성해서 짜는법. **(인터프리터 기반이므로 컴파일 시간이 따로 필요 없음)**
+   1. UIElement C# API 스크립팅으로만 짜는법 (컴파일 필요, IMGUI처럼 코드에 때려박는 형식)
+   2. Uxml, Uss를 작성해서 짜는법. **(인터프리터로 작동하여 컴파일 시간이 따로 필요 없음)**
    
 일단은 둘다 해볼것입니다.
 1번의 경우 IMGUI처럼 간단하게 OnGUI에 떄려박듯이 구현한다고 생각하시면 됩니다. 
